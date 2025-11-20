@@ -1,9 +1,8 @@
-import BintoDec from "./problems/BintoDec";
-
+import BorderRadius from "./problems/BorderRadius";
 function App() {
   return (
     <>
-     <BintoDec />
+     <BorderRadius />
     </>
   )
 }
