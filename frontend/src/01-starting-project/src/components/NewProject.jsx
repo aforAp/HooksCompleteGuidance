@@ -1,16 +1,26 @@
 import { useRef } from "react";
 import Input from "./Input.jsx";
+import Modal from "./Modal.jsx";
 
-export default function NewProject({ onAdd }) {
+export default function NewProject({ onAdd, onCancel }) {
+  const modal = useRef();
   const title = useRef();
   const description = useRef();
   const dueDate = useRef();
-
   function handleSave() {
     const enteredTitle = title.current.value;
     const enteredDescription = description.current.value;
     const enteredDueDate = dueDate.current.value;
 
+    if (
+      enteredTitle.trim() === "" ||
+      enteredDescription.trim() === "" ||
+      enteredDueDate.trim() === ""
+    ) {
+      modal.current.open();
+      return;
+      //return will stop to display the rest of the code.
+    }
     //validation ....
     onAdd({
       title: enteredTitle,
@@ -19,22 +29,35 @@ export default function NewProject({ onAdd }) {
     });
   }
   return (
-    <div className="w-[35rem] mt-16">
-      <menu className="flex items-center justify-end gap-4 my-4">
-        <li>
-          <button className="inputButCancel">Cancel</button>
-        </li>
-        <li>
-          <button className="inputSavBut" onClick={handleSave}>
-            Save
-          </button>
-        </li>
-      </menu>
-      <div>
-        <Input type="text" label="Title" ref={title} />
-        <Input label="Description" textarea ref={description} />
-        <Input type="date" label="Due Date" ref={dueDate} />
+    <>
+      <Modal ref={modal} buttonCapture="Okay">
+        <h2 className="text-xl font-bold text-stone-800 my-4">Invalid Input</h2>
+        <p className="text-stone-600 mb-4">
+          Oops looks like you forget to enter a value
+        </p>
+        <p className="text-stone-600 mb-4">
+          Please make sure you provide a valid value for every input field
+        </p>
+      </Modal>
+      <div className="w-[35rem] mt-16">
+        <menu className="flex items-center justify-end gap-4 my-4">
+          <li>
+            <button className="inputButCancel" onClick={onCancel}>
+              Cancel
+            </button>
+          </li>
+          <li>
+            <button className="inputSavBut" onClick={handleSave}>
+              Save
+            </button>
+          </li>
+        </menu>
+        <div>
+          <Input type="text" label="Title" ref={title} />
+          <Input label="Description" textarea ref={description} />
+          <Input type="date" label="Due Date" ref={dueDate} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
