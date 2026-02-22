@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./useReducer/src/App.jsx";
+import AppNew from "./AppNew.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <AppNew />
   </StrictMode>,
 );

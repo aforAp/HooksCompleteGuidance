@@ -1,14 +1,12 @@
-import React from "react";
-import "./indexNew.css";
-import AppPro from "./DebuggingReactProject/refs/AppPro.jsx";
-import TimerChallange from './DebuggingReactProject/refs/Apps.jsx';
+import React from 'react'
+import App from './PracticeProject/ContextsPractices/App.jsx'
+import Appss from './PracticeProject/ContextsPractices/Appss.jsx'
 const AppNew = () => {
   return (
     <div>
-      <h1 className="my-custom-style">AppNew</h1>
-      <AppPro />
+      <Appss />
     </div>
-  );
-};
+  )
+}
 
 export default AppNew;
