@@ -1,10 +1,9 @@
 import React from 'react'
-import App from './PracticeProject/ContextsPractices/App.jsx'
-import Appss from './PracticeProject/ContextsPractices/Appss.jsx'
+import App from "./useReducer/src/App.jsx";
 const AppNew = () => {
   return (
     <div>
-      <Appss />
+      <App />
     </div>
   )
 }

@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import AppNew from "./AppNew.jsx";
+import App from "./UseEffect/src/App.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AppNew />
+    <App />
   </StrictMode>,
 );
