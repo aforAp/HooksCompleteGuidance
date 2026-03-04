@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./BuildQuiz/src/App.jsx";
+import App from "./PracticeProject/TaskManager/App";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />

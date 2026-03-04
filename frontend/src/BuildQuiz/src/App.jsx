@@ -1,7 +1,14 @@
+import Header from "./components/Header.jsx";
+import Quiz from "./components/Quiz.jsx";
+import './index.css';
 function App() {
     return (
         <>
-        <h1>React Quiz</h1>
+        <Header />
+        <main>
+
+        <Quiz />
+        </main>
         </>
     )
 }

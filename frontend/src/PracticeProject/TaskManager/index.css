@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+ 
+}
+
+@layer components {
+    .inputFields {
+        @apply w-1/2 mt-10 ml-10 p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teaGreen focus:border-transparent;
+    }
+    .sortButtons {
+        @apply mt-10 ml-10 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teaGreen focus:ring-offset-2;
+    }
+}
