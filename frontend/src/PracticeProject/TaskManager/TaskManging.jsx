@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { Edit, X, Copy } from 'lucide-react';
-const TaskManging = ({ task }) => {
+import { Edit, X, Copy, Pencil } from 'lucide-react';
+import Modal from "./Modal";
+const TaskManging = ({ task, onRemoveTask, ref, handleEdit, showPopup, onCopy }) => {
   const [categoryName, setCategory] = useState("desc");
 let styles = "sortButtons";
+let defaultStyles = "flex ml-4 justify-center w-full flex-col items-center";
+let customStyles = showPopup ? defaultStyles + " " + "blur-sm" : defaultStyles;
   function handleCategoryChange(categoryName) {
     setCategory(categoryName);
     if (categoryName === "asc") {
@@ -14,25 +17,25 @@ let styles = "sortButtons";
     }
   }
   return (
-    <div className="flex ml-4 justify-center w-full flex-col items-center">
+    <div className={customStyles}>
       <h1 className="tracking-[4px] mt-5 uppercase">the tasks are</h1>
       {task.map((task, index) => (
-        <p key={index}>
-          <div className="w-[650px] border-2 border-aqua rounded-md mt-5 p-2 text-center text-lg font-semibold hover:bg-teaGreen">
+        <div key={index}>
+          <div className="w-[650px] flex border-2 border-aqua rounded-md mt-5 p-2 text-center text-lg font-semibold hover:bg-teaGreen hover:scale-125">
             {task}
-            <div>
-               <button>
-<X />
+            <div className="flex gap-2 ml-auto">
+               <button onClick={() => onRemoveTask(index)} >
+<X className="text-red-600"/>
         </button>
-        <button>
-            <Copy />
+        <button onClick={() => onCopy(index)}>
+            <Copy className="text-yellow-600"/>
         </button>
-        <button>
-            <Pencil />
+        <button onClick={() => handleEdit(index)}>
+            <Pencil className="text-green-700"/>
         </button>
             </div>
           </div>
-        </p>
+        </div>
       ))}
       <div>
         <button
@@ -53,6 +56,9 @@ let styles = "sortButtons";
         >
           Sort by Desc
         </button>
+      </div>
+      <div>
+        <h1 className="mt-5 tracking-[4px] uppercase">total tasks: {ref.current}</h1>
       </div>
     </div>
   );

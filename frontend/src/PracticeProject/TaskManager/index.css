@@ -13,4 +13,15 @@
     .sortButtons {
         @apply mt-10 ml-10 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teaGreen focus:ring-offset-2;
     }
+
+    .popup {
+        @apply fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-md shadow-lg z-50;
+    }
+
+    .confirmButton {
+        @apply bg-teaGreen w-20 text-green-300 px-4 py-2 rounded-md hover:bg-green-500;
+    }
+        .cancelButton {
+            @apply bg-red-500 w-20 text-white px-4 py-2 rounded-md hover:bg-red-700;
+        }
 }
