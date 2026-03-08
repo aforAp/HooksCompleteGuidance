@@ -1,8 +1,5 @@
-import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./ReactBehindTheScenes/App.jsx";
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <>
-    <App />
-  </>,
-);
+import App from "./ConnectWithDB/src/App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
