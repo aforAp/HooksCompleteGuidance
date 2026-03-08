@@ -12,7 +12,12 @@ function App() {
   const [chosenCount, setChosenCount] = useState(0);
 
   function handleSetCount(newCount) {
+    console.log('the previouschosenCount is:', chosenCount);
     setChosenCount(newCount);
+    setChosenCount((prevChosenCount) => {
+      console.log('the chosenCount is:', prevChosenCount + 1);
+      return newCount;
+    });
   }
 
   return (
@@ -20,7 +25,8 @@ function App() {
       <Header />
       <main>
         <ConfigureCounter onSetCount={handleSetCount} />
-        <Counter initialCount={chosenCount} />
+        <Counter key={chosenCount} initialCount={chosenCount}/>
+        <Counter initialCount={0} key={0} />
       </main>
     </>
   );
