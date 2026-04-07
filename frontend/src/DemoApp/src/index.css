@@ -43,6 +43,8 @@ main {
 }
 
 #new-opinion {
+  display: flex;
+  flex-direction: column;
   background-color: #2e2923;
   color: #f9f7f3;
   padding: 2rem;
@@ -130,7 +132,19 @@ form button:hover {
   margin: 0;
   padding: 0;
 }
-
+.btn-primary {
+  font: inherit;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  font-family: 'Rubik', sans-serif;
+  font-weight: bold;
+  color: #2e2923;
+  background-color: #fd9217;
+  border: 1px solid #fd9217;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 35rem;
+}
 #opinions li {
   margin: 1rem 0;
   padding: 1rem;

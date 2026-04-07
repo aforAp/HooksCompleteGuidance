@@ -1,8 +1,9 @@
 import { useState, use } from "react";
+import { useFormStatus } from "react-dom";
 import { OpinionsContext } from "../store/opinions-context";
 
 export function NewOpinion() {
-  const {addOpinion} = use(OpinionsContext);
+  const { addOpinion } = use(OpinionsContext);
   const enteredValues = {
     title: "",
     body: "",
@@ -12,6 +13,7 @@ export function NewOpinion() {
   const [formStates, setFormState] = useState({
     enteredValues,
     errors: null,
+    pending: false,
   });
 
   async function handleSubmit(event) {
@@ -22,7 +24,7 @@ export function NewOpinion() {
     const userName = formData.get("userName");
 
     const UserDatas = { title, body, userName };
-       setFormState((prevState) => ({ ...prevState, enteredValues: UserDatas }));
+    setFormState((prevState) => ({ ...prevState, enteredValues: UserDatas }));
     let errors = [];
 
     if (title.trim().length < 5) {
@@ -39,14 +41,15 @@ export function NewOpinion() {
 
     if (errors.length > 0) {
       setFormState((prevState) => ({ ...prevState, errors: errors }));
-   
+
       return;
     }
 
     // submit to backend
     console.log(formStates.enteredValues);
-    await addOpinion(formStates.enteredValues);
-
+    setFormState((prevState) => ({ ...prevState, pending: true }));
+    await addOpinion(UserDatas);
+     setFormState((prevState) => ({ ...prevState, pending: false }));
     return { errors: null };
   }
 
@@ -92,10 +95,9 @@ export function NewOpinion() {
             ))}
           </ul>
         )}
-
-        <p className="actions">
-          <button type="submit">Submit</button>
-        </p>
+      <button className="btn-primary" type="submit" disabled={formStates.pending}>
+            {formStates.pending ? "Submitting..." : "Submit"}
+          </button>
       </form>
     </div>
   );

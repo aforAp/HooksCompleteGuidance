@@ -1,4 +1,18 @@
+import { use } from "react";
+import { OpinionsContext } from "../store/opinions-context";
 export function Opinion({ opinion: { id, title, body, userName, votes } }) {
+  const { upVoteOpinion, downVoteOpinion } = use(OpinionsContext);
+
+  async function upVoteHandler(event) {
+    event.preventDefault();
+    await upVoteOpinion(id);
+  }
+
+  async function downVoteHandler(event) {
+     event.preventDefault();
+    await downVoteOpinion(id);
+  }
+
   return (
     <article>
       <header>
@@ -7,7 +21,7 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
       </header>
       <p>{body}</p>
       <form className="votes">
-        <button>
+        <button onClick={upVoteHandler}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -27,7 +41,7 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
 
         <span>{votes}</span>
 
-        <button>
+        <button onClick={downVoteHandler}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
