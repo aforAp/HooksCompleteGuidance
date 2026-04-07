@@ -4,7 +4,7 @@ import express from 'express';
 
 async function loadOpinions() {
   try {
-    const dbFileData = await fs.readFile('./db.json');
+    const dbFileData = await fs.readFile('./db.json', 'utf-8');
     const parsedData = JSON.parse(dbFileData);
     return parsedData.opinions;
   } catch (error) {
@@ -111,6 +111,6 @@ app.post('/opinions/:id/downvote', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log('Server running on http://localhost:3000');
 });

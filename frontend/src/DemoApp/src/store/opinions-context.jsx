@@ -7,12 +7,12 @@ export const OpinionsContext = createContext({
   downvoteOpinion: (id) => {},
 });
 
-function OpinionsContextProvider({ children }) {
+export function OpinionsContextProvider({ children }) {
   const [opinions, setOpinions] = useState();
 
   useEffect(() => {
     async function loadOpinions() {
-      const response = await fetch('http://localhost:3000/opinions');
+      const response = await fetch('http://localhost:3001/opinions');
       const opinions = await response.json();
       setOpinions(opinions);
     }
@@ -21,7 +21,7 @@ function OpinionsContextProvider({ children }) {
   }, []);
 
   async function addOpinion(enteredOpinionData) {
-    const response = await fetch('http://localhost:3000/opinions', {
+    const response = await fetch('http://localhost:3001/opinions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -68,6 +68,3 @@ function OpinionsContextProvider({ children }) {
 
   return <OpinionsContext value={contextValue}>{children}</OpinionsContext>;
 }
-
-
-export default OpinionsContextProvider;
