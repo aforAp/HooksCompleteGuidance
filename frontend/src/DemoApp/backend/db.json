@@ -2,7 +2,7 @@
   "opinions": [
     {
       "id": 1775546080371,
-      "votes": 0,
+      "votes": 4,
       "userName": "Satheesh S",
       "title": "124244324232",
       "body": "fefgrefgfd rerterere wererer 23e34e3 e24e3221323"
@@ -12,14 +12,14 @@
       "userName": "Maximilian Schwarzmüller",
       "title": "Do yourself a favor and learn React!",
       "body": "React is an amazing JavaScript library!\n\nDespite all it's shortcomings.",
-      "votes": 0
+      "votes": 5
     },
     {
       "id": 2,
       "userName": "Maximilian Schwarzmüller",
       "title": "React has more depth than you might first think!",
       "body": "React is a great library to learn, but it's not just about the basics. Dive deeper!\nFor example with this course!",
-      "votes": 0
+      "votes": 2
     }
   ]
 }

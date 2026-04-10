@@ -1,16 +1,28 @@
-import { use } from "react";
+import { use, useState, useOptimistic } from "react";
 import { OpinionsContext } from "../store/opinions-context";
 export function Opinion({ opinion: { id, title, body, userName, votes } }) {
-  const { upVoteOpinion, downVoteOpinion } = use(OpinionsContext);
+  const [upwardDisabled, setUpwardDisabled] = useState(false);
+  const [downwardDisabled, setDownwardDisabled] = useState(false);
+  const { upvoteOpinion, downvoteOpinion } = use(OpinionsContext);
+
+  const [optimisticVotes, setVotesOptimistically] = useOptimistic(votes, (prevVotes, mode) => mode === "upvote" ? prevVotes + 1 : prevVotes - 1);
+//mode is the argument which was passed to the setVotesOptimistically function.
 
   async function upVoteHandler(event) {
     event.preventDefault();
-    await upVoteOpinion(id);
+    setVotesOptimistically('up');
+    setUpwardDisabled(true);
+    await upvoteOpinion(id);
+    setUpwardDisabled(false);
   }
 
+
   async function downVoteHandler(event) {
-     event.preventDefault();
-    await downVoteOpinion(id);
+    event.preventDefault();
+    setVotesOptimistically('down');
+    setDownwardDisabled(true);
+    await downvoteOpinion(id);
+    setDownwardDisabled(false);
   }
 
   return (
@@ -21,7 +33,7 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
       </header>
       <p>{body}</p>
       <form className="votes">
-        <button onClick={upVoteHandler}>
+        <button disabled={upwardDisabled || downwardDisabled} onClick={upVoteHandler}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -39,9 +51,9 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
           </svg>
         </button>
 
-        <span>{votes}</span>
+        <span>{optimisticVotes}</span>
 
-        <button onClick={downVoteHandler}>
+        <button disabled={downwardDisabled} onClick={downVoteHandler}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
