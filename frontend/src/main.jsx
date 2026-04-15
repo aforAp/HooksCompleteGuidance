@@ -1,4 +1,3 @@
 import ReactDOM from "react-dom/client";
-import App from "./FoodOrderApp/src/App.jsx";
-
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+import FormDatas from "./DemoApp/src/FormDatas";
+ReactDOM.createRoot(document.getElementById("root")).render(<FormDatas />);
