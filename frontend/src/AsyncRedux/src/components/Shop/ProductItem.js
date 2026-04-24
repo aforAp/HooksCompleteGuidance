@@ -1,23 +1,49 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../../store/cart-slice';
 import Card from '../UI/Card';
 import classes from './ProductItem.module.css';
-import { useDispatch } from 'react-redux';
 const ProductItem = (props) => {
-  const { title, price, description, id } = props;
+  const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
-  const addToCartHandler = () => {
-    console.log( id,
-        title,
-        price,
-        description);
-       dispatch(cartActions.addItemToCart({
-        id,
-        title,
-        price,
-        description
-       }));
+  const { title, price, description, id } = props;
+  // const addToCartHandler = () => {
+  //      dispatch(cartActions.addItemToCart({
+  //       id,
+  //       title,
+  //       price,
+  //       description
+  //      }));
 
-  };
+  // };
+
+  const addToCartHandler = () => {
+    const newTotalQuantity = cart.totalQuantity + 1;
+    const updatedItems = cart.items.slice();
+    const existingCart = updatedItems.find(item => item.id === id);
+
+    if (existingCart) {
+      const updatedItem = {...existingCart};
+      updatedItem.quantity++;
+      updatedItem.price = updatedItem.price + price;
+      const existingCartIndex = updatedItems.findIndex(item => item.id === id);
+      updatedItems[existingCartIndex] = updatedItem;
+    } else {
+      updatedItems.push({
+        id,
+        price,
+        quantity: 1,
+        totalPrice: price,
+        name: title
+      });
+    }
+
+    const newCart = {
+      totalQuantity: newTotalQuantity,
+      items: updatedItems
+    }
+
+    dispatch(cartActions.replaceCart(newCart));
+  }
 
 return (
     <li className={classes.item}>
