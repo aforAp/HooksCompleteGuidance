@@ -9,12 +9,35 @@ const App = () => {
   const todos = useSelector((state) => state.todos.items);
   const math = useSelector((state) => state.math);
 
-  function EditInput(id) {
+ function EditInput(id) {
     const existingTodo = todos.find(item => item.id === id);
     if (existingTodo) {
       let input = prompt("Edit Todo", existingTodo.text);
       if (input !== null) {
         dispatch(editTodo({ id, text: input }));
+      }
+
+      
+    }
+  }
+
+  async function AddData(event) {
+    event.preventDefault();
+    if (input.trim() !== "") {
+     const datas =  await fetch("http://localhost:5000/todos/post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: input }),
+      });
+      if(datas.ok) {
+        const newTodo = await datas.json();
+        dispatch(addTodo(newTodo.text));
+        setInput("");
+      } else {
+          const errorData = await datas.json();
+      console.error(errorData.error);
       }
     }
   }
@@ -28,7 +51,7 @@ const App = () => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button onClick={() => dispatch(addTodo(input))}>Add Todo</button>
+      <button onClick={AddData}>Add Todo</button>
       {todos.map((todo) => (
         <div
           key={todo.id}
