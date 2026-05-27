@@ -7,11 +7,13 @@ export default function NewEventsSection() {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["events"],
     queryFn: fetchEvents,
+    staleTime: 5000,
+    // gcTime: 5000,
   });
 
   let content;
-console.log(data);
-console.log(isPending);
+  console.log(data);
+  console.log(isPending);
   if (isPending) {
     content = <LoadingIndicator />;
   }
