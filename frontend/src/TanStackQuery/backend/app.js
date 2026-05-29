@@ -111,19 +111,18 @@ app.post('/events', async (req, res) => {
 
 app.put('/events/:id', async (req, res) => {
   const { id } = req.params;
-  const { event } = req.body;
-
-  if (!event) {
-    return res.status(400).json({ message: 'Event is required' });
-  }
+  console.log("the req params");
+  console.log(id);
+  const { title, description, date, image, location, time } = req.body;
+console.log("the backend data");
 
   if (
-    !event.title?.trim() ||
-    !event.description?.trim() ||
-    !event.date?.trim() ||
-    !event.time?.trim() ||
-    !event.image?.trim() ||
-    !event.location?.trim()
+    !title?.trim() ||
+    !description?.trim() ||
+    !date?.trim() ||
+    !time?.trim() ||
+    !image?.trim() ||
+    !location?.trim()
   ) {
     return res.status(400).json({ message: 'Invalid data provided.' });
   }
@@ -139,7 +138,7 @@ app.put('/events/:id', async (req, res) => {
 
   events[eventIndex] = {
     id,
-    ...event,
+    title, description, date, image, location, time 
   };
 
   await fs.writeFile('./data/events.json', JSON.stringify(events));

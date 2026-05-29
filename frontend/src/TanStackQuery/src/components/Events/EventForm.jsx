@@ -4,8 +4,10 @@ import ImagePicker from "../ImagePicker.jsx";
 import { fetchSelectableImages } from "../../util/http.js";
 import ErrorBlock from "../UI/ErrorBlock.jsx";
 export default function EventForm({ inputData, onSubmit, children }) {
+  console.log(inputData);
   const [selectedImage, setSelectedImage] = useState(inputData?.image);
-
+  console.log("The input data in the form");
+  console.log(inputData);
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["events-images"],
     queryFn: fetchSelectableImages,
@@ -28,12 +30,7 @@ export default function EventForm({ inputData, onSubmit, children }) {
     <form id="event-form" onSubmit={handleSubmit}>
       <p className="control">
         <label htmlFor="title">Title</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          defaultValue={inputData?.title ?? ""}
-        />
+        <input type="text" id="title" name="title" value={inputData?.title} />
       </p>
       {isPending && <p>Loading images...</p>}
       {isError && (
@@ -57,6 +54,7 @@ export default function EventForm({ inputData, onSubmit, children }) {
         <textarea
           id="description"
           name="description"
+          value={inputData?.description}
           defaultValue={inputData?.description ?? ""}
         />
       </p>
@@ -68,6 +66,7 @@ export default function EventForm({ inputData, onSubmit, children }) {
             type="date"
             id="date"
             name="date"
+            value={inputData?.date}
             defaultValue={inputData?.date ?? ""}
           />
         </p>
@@ -78,6 +77,7 @@ export default function EventForm({ inputData, onSubmit, children }) {
             type="time"
             id="time"
             name="time"
+            value={inputData?.time}
             defaultValue={inputData?.time ?? ""}
           />
         </p>
@@ -89,6 +89,7 @@ export default function EventForm({ inputData, onSubmit, children }) {
           type="text"
           id="location"
           name="location"
+          value={inputData?.location}
           defaultValue={inputData?.location ?? ""}
         />
       </p>

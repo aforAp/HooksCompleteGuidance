@@ -2,11 +2,17 @@ import { QueryClient } from "@tanstack/react-query";
 
   export const queryClient = new QueryClient();
 
-  export async function fetchEvents({signal, searchTerm}) {
+  export async function fetchEvents({signal, searchTerm, max}) {
     console.log(searchTerm);
     let url = 'http://localhost:3000/events';
-    if (searchTerm) {
+
+    if(searchTerm && max) {
+      url += '?search=' + searchTerm + '&max=' + max;
+    }
+    else if (searchTerm) {
       url += '?search=' + searchTerm;
+    }  else if ( max ){
+      url += '?max=' + max;
     }
       const response = await fetch(url, { signal: signal });
 console.log(response);
@@ -86,4 +92,23 @@ console.log(events);
         throw error;
       }
 
+    }
+
+    export async function updateEvent({id, event}) {
+      console.log("the event is");
+      console.log(event);
+      const response = await fetch(`http://localhost:3000/events/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+         body: JSON.stringify(event),
+      });
+
+      if(!response.ok) {
+        const error = new Error('An error occured while updating the event');
+        error.code = response.status;
+        error.info = await response.json();
+        throw error;
+      }
     }
