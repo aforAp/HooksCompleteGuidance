@@ -1,3 +1,3 @@
 import ReactDOM from "react-dom/client";
-import App from "./TanStackQuery/src/App.jsx";
+import App from "./Animations/App";
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);

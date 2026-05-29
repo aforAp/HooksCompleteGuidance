@@ -3,6 +3,7 @@ import {
   redirect,
   useLoaderData,
   useNavigate,
+  useNavigation,
   useParams,
   useSubmit,
 } from "react-router-dom";
@@ -15,10 +16,12 @@ import ErrorBlock from "../UI/ErrorBlock.jsx";
 export default function EditEvent() {
   const navigate = useNavigate();
   const submit = useSubmit();
+  const { state } = useNavigation();
   const params = useParams();
   const { data, isError, error } = useQuery({
     queryKey: ["events", params.id],
     queryFn: ({ signal }) => fetchEvent({ signal, id: params.id }),
+    staleTime: 10000
   });
 
   // const { mutate } = useMutation({
@@ -73,12 +76,18 @@ export default function EditEvent() {
   if (data) {
     content = (
       <EventForm inputData={data} onSubmit={handleSubmit}>
-        <Link to="../" className="button-text">
-          Cancel
-        </Link>
-        <button type="submit" className="button">
-          Update
-        </button>
+        {state === "submitting" ? (
+          <p>Sending Data...</p>
+        ) : (
+          <>
+            <Link to="../" className="button-text">
+              Cancel
+            </Link>
+            <button type="submit" className="button">
+              Update
+            </button>
+          </>
+        )}
       </EventForm>
     );
   }
