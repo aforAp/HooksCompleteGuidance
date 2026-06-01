@@ -309,6 +309,7 @@ main {
 
 .modal {
   top: 10%;
+  left: 30%;
   border-radius: 6px;
   padding: 1.5rem;
   width: 30rem;
