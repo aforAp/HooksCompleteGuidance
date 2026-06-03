@@ -62,13 +62,16 @@ main {
 }
 
 .accordion-item-content {
-  display: none;
   padding: 1rem;
   background-color: #2c344a;
 }
 
 .open {
   display: block;
+}
+
+.close {
+  display: none;
 }
 
 .searchable-list {
@@ -126,6 +129,6 @@ main {
 }
 
 #travel-demo button:hover,
-#travel-demo button:active {
+  #travel-demo button:active {
   background-color: #363e57;
 }

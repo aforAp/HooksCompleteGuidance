@@ -1,0 +1,11 @@
+export { AnimatedEcommerce } from './AnimatedEcommerce';
+export { HeroSection } from './components/HeroSection';
+export { ProductsSection } from './components/ProductsSection';
+export { CustomerSection } from './components/CustomerSection';
+export { FeaturesSection } from './components/FeaturesSection';
+export { Footer } from './components/Footer';
+export { Navigation } from './components/Navigation';
+export { ProductCard } from './components/ProductCard';
+export { ProductGrid } from './components/ProductGrid';
+export { useSmoothScroll, useScrollAnimation, useParallaxScroll, useStaggerAnimation, useHoverAnimation } from './hooks/useGSAP';
+export { PRODUCTS, CUSTOMERS } from './data/products';
