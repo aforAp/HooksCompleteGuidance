@@ -1,4 +1,3 @@
 import ReactDOM from "react-dom/client";
-import App from "./Animations/App";
-import "./styles.css";
+import App from "./ReactPatterns/App.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);

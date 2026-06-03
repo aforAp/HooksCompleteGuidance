@@ -1,13 +1,26 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import cityImg from "../assets/city.jpg";
 import heroImg from "../assets/hero.png";
 
 export default function WelcomePage() {
+  const { scrollY, scrollYProgress } = useScroll();
+  //scrollY we can get the absolute pixels
+  //scrollYProgress values b/w 0 and 1.
+  const scale = useTransform(scrollY, [0, 200, 300, 500], [1, 0.5, 0.5, 0]);
+  const yCity = useTransform(scrollY, [0, 200], [0, -100]);
+  const yHero = useTransform(scrollY, [0, 200], [0, -150]);
+  const opacityHero = useTransform(scrollY, [0, 300, 500], [1, 1, 0]);
+  const ytext = useTransform(scrollY, [0, 200, 300, 500], [0, 50, 50, 300]);
+  const scaleText = useTransform(scrollY, [0, 300], [1, 1.5]);
+  //here the 0, 200 pixels of scroll then the opacity should be 1 and when we reached 200 px it should be 0.5 pixels.
   return (
     <>
       <header id="welcome-header">
-        <div id="welcome-header-content">
+        <motion.div
+          id="welcome-header-content"
+          style={{ scale: scaleText, y: ytext }}
+        >
           <motion.h1
             animate={{
               animationDelay: 0.5,
@@ -19,13 +32,19 @@ export default function WelcomePage() {
           <Link id="cta-link" to="/challenges">
             Get Started
           </Link>
-        </div>
-        <img
+        </motion.div>
+        <motion.img
+          style={{ y: yHero, opacity: opacityHero }}
           src={cityImg}
           alt="A city skyline touched by sunlight"
           id="city-image"
         />
-        <img src={heroImg} alt="A superhero wearing a cape" id="hero-image" />
+        <motion.img
+          style={{ opacity: scale, y: yCity }}
+          src={heroImg}
+          alt="A superhero wearing a cape"
+          id="hero-image"
+        />
       </header>
       <main id="welcome-content">
         <section>
