@@ -1,6 +1,15 @@
 import Accordion from "./components/Accordion";
+import SearchableList from "./components/SearchableList/SearchableList.jsx";
+import { PLACES } from "./places.ts";
+
 import "./index.css";
+import Place from "./components/Place.jsx";
 function App() {
+  const savannnaImg = "/assets/african-savanna.jpg";
+  const amazonImg = "/assets/amazon-river.jpg";
+  const caribbeanImg = "/assets/caribbean-beach.jpg";
+  const desertImg = "/assets/desert-dunes.jpg";
+  const forestImg = "/assets/forest-waterfall.jpg";
   return (
     <main>
       <section>
@@ -35,6 +44,14 @@ function App() {
             </Accordion.Content>
           </Accordion.Item>
         </Accordion>
+      </section>
+      <section>
+        <SearchableList items={PLACES} itemKeyFn={(item) => item.id}>
+          {(item) => <Place item={item} />}
+        </SearchableList>
+        <SearchableList items={["item 1", "item 2"]} itemKeyFn={(item) => item}>
+          {(item) => <Place item={item} />}
+        </SearchableList>
       </section>
     </main>
   );
